@@ -5,19 +5,21 @@ import json
 import requests
 # Create your views here.
 def home(request):   
-    response=requests.get('https://reqres.in/api/users?page=1').json() 
 
-
-    response_length = len(response['data'])
-    print(response_length)   # lenght of key : data 6 user
-    for i in range(response_length):
-        print(response['data'][i])        
-  
+    count = 0
+    temp = []
+    api_url = 'https://reqres.in/api/users?page='
+    for i in range(1,13):
+        response=requests.get(api_url + str(i)).json()  
+        # temp.append(response)
+        print('\n',response[0])
 
     context = {
         'title': 'Shubham , lets start api',    
-        'response':response
+        # 'response':temp
     }
-    return render(request,'app/home.html',context)
+    return HttpResponse(response)
+    
 
- 
+
+
